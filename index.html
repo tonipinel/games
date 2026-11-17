@@ -889,8 +889,11 @@
     render();
   });
 
+  // En la web pública los precios llevan un +10 % (en local se ven los reales).
+  const PUBLIC_MARKUP = 1.10;
   function effectivePrice(g) {
-    return g.salePrice != null ? g.salePrice : g.value;
+    const p = g.salePrice != null ? g.salePrice : g.value;
+    return IS_LOCAL ? p : Math.round(p * PUBLIC_MARKUP);
   }
 
   function sortFn(a, b) {
